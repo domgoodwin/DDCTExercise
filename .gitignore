@@ -1,0 +1,15 @@
+# General
+*.zip
+*.txt
+
+# Scala
+*.class
+*.log
+target
+
+# InteliJ
+*.iml
+*.ipr
+*.iws
+.idea
+out
