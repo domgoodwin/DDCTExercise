@@ -37,6 +37,17 @@ class TestMain extends FunSuite {
   test("Hot food and drink"){
     // Test a bill with two items, both drinks
     val bill = Main.getBill("Cola", "Steak Sandwich")
-    assert(bill == 5.50); // 5 + 20% service
+    assert(bill == 6); // 5 + 20% service
+  }
+  test("Service charge over 20"){
+    // Test a bill where the service charge is limited to 20
+    val bill = Main.getBill(
+      "Steak Sandwich", "Steak Sandwich", "Steak Sandwich", "Steak Sandwich",
+      "Steak Sandwich", "Steak Sandwich", "Steak Sandwich", "Steak Sandwich",
+      "Steak Sandwich", "Steak Sandwich", "Steak Sandwich", "Steak Sandwich",
+      "Steak Sandwich", "Steak Sandwich", "Steak Sandwich", "Steak Sandwich",
+      "Steak Sandwich", "Steak Sandwich", "Steak Sandwich", "Steak Sandwich",
+      "Steak Sandwich", "Steak Sandwich", "Steak Sandwich", "Steak Sandwich");
+    assert(bill == 128) // 108 + 20% limited to 20 (21.96)
   }
 }
