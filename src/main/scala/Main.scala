@@ -24,16 +24,20 @@ object Main {
     // Get total of chosen items
     val total = {
       // Total base sum, no added charges
-      items.map(_.price).sum
+      val baseTotal = items.map(_.price).sum;
+      // Check if bill contains any food
+      val containsFood = items.exists(_.drink == false);
+      // Check if bill contains any hot food items
+      val containsHot = items.exists(_.hot == true);
 
-
+      // Get rate of service charge
+      val serviceCharge = (containsFood,containsHot) match{
+        case (true,true) => 1.2; // Food and Hot - 20%
+        case (true, _) => 1.1; // Food and not hot - 10%
+        case (_,_) => 1; // Just drinks 0%
+      }
+      baseTotal * serviceCharge;
     };
-
-    // If all items are drinks no service charge applied
-    // When purchased items include any food apply a service charge of 10% to the total bill (rounded to 2 decimal places)
-    // When purchased items include any hot food apply a service charge of 20% to the total bill with a maximum £20 service charge
-
-
     // Return total
     total;
   }
