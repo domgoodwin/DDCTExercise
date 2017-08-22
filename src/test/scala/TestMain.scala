@@ -17,22 +17,26 @@ class TestMain extends FunSuite {
   test("Sum Cheese Sandwich"){
     // Test a bill with just cheese sandwich returns value of cheese sandwich
     val bill = Main.getBill("Cheese Sandwich");
-    assert(bill == 2);
+    assert(bill == 2.2); // Food but cold, (2 + 10% service)
   }
   test("Sum Coffee&Cola"){
     // Test a bill with coffee and cola (2 items) returns value of both
     val bill = Main.getBill("Cola", "Coffee");
-    assert(bill == 1.5);
+    assert(bill == 1.5); // All drinks no service
   }
   test("Sum All Items"){
     // Test a bill with all valid items from menu
     val bill = Main.getBill("Cola", "Coffee", "Cheese Sandwich", "Steak Sandwich");
-    assert(bill == 8);
+    assert(bill == 9.6); // 8 + 20% service
   }
   test("Sum Invalid Item"){
     // Test a bill for an item not on the list
     val bill = Main.getBill("Lemonade");
     assert(bill == 0);
   }
-
+  test("Hot food and drink"){
+    // Test a bill with two items, both drinks
+    val bill = Main.getBill("Cola", "Steak Sandwich")
+    assert(bill == 5.50); // 5 + 20% service
+  }
 }
