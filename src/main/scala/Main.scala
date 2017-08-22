@@ -6,7 +6,7 @@ object Main {
     val cola = new MItem("Cola", false, 0.50, true);
     val coffee = new MItem("Coffee", true, 1, true);
     val cheeseSand = new MItem("Cheese Sandwich", false, 2, false);
-    val steakSand = new MItem("Steak Sandwich", false, 4.50, false);
+    val steakSand = new MItem("Steak Sandwich", true, 4.50, false);
     List(cola, coffee, cheeseSand, steakSand);
   }
 
@@ -31,14 +31,19 @@ object Main {
       val containsHot = items.exists(_.hot == true);
 
       // Get rate of service charge
-      val serviceCharge = (containsFood,containsHot) match{
-        case (true,true) => 1.2; // Food and Hot - 20%
-        case (true, _) => 1.1; // Food and not hot - 10%
-        case (_,_) => 1; // Just drinks 0%
+      val serviceChargePercent = (containsFood,containsHot) match{
+        case (true,true) => 0.2; // Food and Hot - 20%
+        case (true, _) => 0.1; // Food and not hot - 10%
+        case (_,_) => 0; // Just drinks 0%
       }
-      baseTotal * serviceCharge;
+      val serviceChargeAmount = {
+        val calculatedAmount = baseTotal * serviceChargePercent;
+        if(calculatedAmount > 20 & containsHot) 20 else calculatedAmount;
+      };
+      baseTotal + serviceChargeAmount;
+
     };
     // Return total
-    total;
+    BigDecimal(total).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble;
   }
 }
