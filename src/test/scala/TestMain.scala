@@ -6,8 +6,8 @@ import org.scalatest.FunSuite
 class TestMain extends FunSuite {
   test("Creating a menu item"){
     // Test creating a menu item object
-    val item = new MItem("Test", false, 10);
-    assert(item.name == "Test" & item.price == 10 & item.hot == false);
+    val item = new MItem("Test", false, 10, false);
+    assert(item.name == "Test" & item.price == 10 & item.hot == false & item.drink == false);
   }
   test("Menu Initialise"){
     // Test menu when initialised has the 4 items needed
